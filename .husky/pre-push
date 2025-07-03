@@ -1,0 +1,84 @@
+#!/bin/sh
+# Husky pre-push hook for TTS app
+# This hook runs comprehensive validation before allowing push to remote
+
+echo "Starting pre-push validation..."
+echo "This may take a moment as we run the full test suite and build process."
+
+# Start timing
+START_TIME=$(date +%s)
+
+# Function to calculate elapsed time
+calculate_elapsed_time() {
+  END_TIME=$(date +%s)
+  ELAPSED=$((END_TIME - START_TIME))
+  echo "Total validation time: ${ELAPSED} seconds"
+}
+
+# Function to handle failures
+handle_failure() {
+  echo ""
+  echo "Pre-push validation FAILED!"
+  echo "Push has been blocked to prevent broken code from reaching the remote repository."
+  echo ""
+  echo "Quick fixes you can try:"
+  echo "- Run 'npm run lint' to fix linting issues"
+  echo "- Run 'npm run format' to fix formatting issues"
+  echo "- Run 'npm run type-check' to see TypeScript errors"
+  echo "- Run 'npm run test' to run tests individually"
+  echo "- Run 'npm run build' to check for build errors"
+  echo ""
+  calculate_elapsed_time
+  exit 1
+}
+
+# 1. Lint entire codebase
+echo ""
+echo "Step 1/4: Running ESLint on entire codebase..."
+if ! npm run lint:check; then
+  echo "ESLint found errors in the codebase."
+  handle_failure
+fi
+echo "ESLint passed successfully."
+
+# 2. TypeScript type checking
+echo ""
+echo "Step 2/4: Running TypeScript type checking..."
+if ! npm run type-check; then
+  echo "TypeScript type checking failed."
+  handle_failure
+fi
+echo "TypeScript type checking passed successfully."
+
+# 3. Run full test suite
+echo ""
+echo "Step 3/4: Running full test suite..."
+if ! npm run test; then
+  echo "Test suite failed."
+  handle_failure
+fi
+echo "All tests passed successfully."
+
+# 4. Build process
+echo ""
+echo "Step 4/4: Running build process..."
+if ! npm run build; then
+  echo "Build process failed."
+  handle_failure
+fi
+echo "Build completed successfully."
+
+# Success message
+echo ""
+echo "=========================================="
+echo "Pre-push validation PASSED!"
+echo "All checks completed successfully:"
+echo "- ESLint: No linting errors found"
+echo "- TypeScript: Type checking passed"
+echo "- Tests: All tests passing"
+echo "- Build: Build process completed"
+echo "=========================================="
+echo "Proceeding with push to remote repository..."
+
+calculate_elapsed_time
+exit 0
