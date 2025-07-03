@@ -1,1 +1,34 @@
+#!/bin/sh
+# Husky pre-commit hook for TTS app
+# This hook runs lint-staged to check staged files before commit
+
+echo "Running pre-commit checks..."
+
+# Check if there are staged files
+if git diff --cached --quiet; then
+  echo "No staged changes found. Skipping pre-commit checks."
+  exit 0
+fi
+
+echo "Checking staged files with lint-staged..."
+
+# Run lint-staged
 npx lint-staged
+
+# Capture the exit code
+LINT_STAGED_EXIT_CODE=$?
+
+# Check if lint-staged passed
+if [ $LINT_STAGED_EXIT_CODE -eq 0 ]; then
+  echo "Pre-commit checks passed successfully!"
+  echo "Proceeding with commit..."
+else
+  echo "Pre-commit checks failed!"
+  echo "Please fix the issues above before committing."
+  echo "You can run 'npm run lint' to fix linting issues automatically."
+  echo "You can run 'npm run format' to fix formatting issues automatically."
+  echo "You can run 'npm run type-check' to check TypeScript issues."
+  exit 1
+fi
+
+exit 0
