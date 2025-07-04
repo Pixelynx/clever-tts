@@ -1,13 +1,19 @@
 # Clever Text-to-Speech
 
-A modern web application that intelligently converts text to speech with smart character filtering. Built to provide a superior TTS experience by automatically removing formatting characters and filler text while preserving meaningful punctuation for natural speech flow.
+A modern web application that intelligently converts text to speech with smart
+character filtering. Built to provide a superior TTS experience by automatically
+removing formatting characters and filler text while preserving meaningful
+punctuation for natural speech flow.
 
 ## Features
 
-- **Intelligent Character Filtering**: Automatically removes Markdown syntax, extra symbols, and accidental keystrokes
-- **Natural Speech Flow**: Preserves meaningful punctuation for better speech rhythm
+- **Intelligent Character Filtering**: Automatically removes Markdown syntax,
+  extra symbols, and accidental keystrokes
+- **Natural Speech Flow**: Preserves meaningful punctuation for better speech
+  rhythm
 - **Modern UI**: Clean, responsive interface built with Next.js and Tailwind CSS
-- **Smart Processing**: AI-powered filtering that learns and adapts to improve speech quality
+- **Smart Processing**: AI-powered filtering that learns and adapts to improve
+  speech quality
 
 ## Getting Started
 
@@ -23,7 +29,8 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the
+result.
 
 ## Technology Stack
 

@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Clever TTS - Smart Text-to-Speech",
-  description: "Intelligent text-to-speech with smart character filtering for natural speech flow",
+  description:
+    "Intelligent text-to-speech with smart character filtering for natural speech flow",
 };
 
 export default function RootLayout({

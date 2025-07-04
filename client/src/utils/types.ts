@@ -27,4 +27,4 @@ export interface ComponentWithChildren {
 
 export interface ComponentWithClassName {
   className?: string;
-} 
+}

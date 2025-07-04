@@ -6,7 +6,8 @@ export default function Home() {
           Smart Text-to-Speech App
         </h1>
         <p className="text-text-400 mb-8">
-          Experience intelligent text-to-speech with smart character filtering for natural speech flow.
+          Experience intelligent text-to-speech with smart character filtering
+          for natural speech flow.
         </p>
       </div>
     </div>
